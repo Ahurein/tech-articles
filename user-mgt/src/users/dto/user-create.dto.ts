@@ -8,7 +8,6 @@ import {
   Length,
   Max,
   Min,
-  Validate,
   ValidateNested,
 } from 'class-validator';
 import { Transform, Type } from 'class-transformer';
@@ -21,26 +20,26 @@ export class UserCreateDto {
   @Length(2, 30, { message: 'Name must be between 2 and 30 characters' })
   @Transform(({ value }) => value.trim())
   @IsUsernameUnique({ server: 'east-1', message: 'Username already exists' })
-  name: string;
+  public readonly name: string;
 
   @IsEmail({}, { message: 'Invalid email address' })
-  email: string;
+  public readonly email: string;
 
   @IsValidPassword()
-  password: string;
+  public readonly password: string;
 
   @IsInt()
   @Min(18, { message: 'Age must be at least 18' })
   @Max(100, { message: 'Age must not exceed 100' })
-  age: number;
+  public readonly age: number;
 
   @IsDate({ message: 'Invalid date format' })
   @Type(() => Date)
-  dateOfBirth: Date;
+  public readonly dateOfBirth: Date;
 
   @IsArray()
   @ArrayNotEmpty({ message: 'Photos array should not be empty' })
   @ValidateNested({ each: true })
   @Type(() => UserPhotoDto)
-  photos: UserPhotoDto[];
+  public readonly photos: UserPhotoDto[];
 }

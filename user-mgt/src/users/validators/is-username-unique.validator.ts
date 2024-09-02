@@ -29,7 +29,7 @@ export class IsUsernameUniqueConstraint
   }
 
   async checkUsernameOnServer(username: string, server: string) {
-    return true;
+    return false;
   }
 }
 
